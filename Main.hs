@@ -25,9 +25,13 @@ data Grid = Grid Point (Map Point Tile) deriving Show
 newGrid :: Grid
 newGrid = Grid (0,0) $ Map.fromList [
     ((0,0),Start East),
-    ((1,0),Corner East),
-    ((1,1),Straight Vertical),
-    ((1,2),End South)]
+    ((1,0),Corner South),
+    ((1,1),Corner North),
+    ((2,1),Corner South),
+    ((2,2),Corner West),
+    ((1,2),Corner East),
+    ((1,3),Straight Vertical),
+    ((1,4),End South)]
 
 data Plumb = Plumb Point Angle Angle deriving (Typeable, Show)
 
@@ -56,7 +60,7 @@ plumbNext grid curr flow =
     case Map.lookup curr grid of
         Just (Start theta) -> Just $ Plumb curr None theta
         Just (End theta)
-            | flow == theta -> Just $ Plumb curr theta None
+            | flow == theta -> Just $ Plumb curr (invert theta) None
         Just (Straight Horizontal)
             | flow == East -> Just $ Plumb curr East West
             | flow == West -> Just $ Plumb curr West East
@@ -64,8 +68,10 @@ plumbNext grid curr flow =
             | flow == South -> Just $ Plumb curr North South
             | flow == North -> Just $ Plumb curr South North
         Just (Corner theta)
-            | flow == theta      -> Just $ Plumb curr theta (bend theta)
-            | flow == bend theta -> Just $ Plumb curr theta (revBend theta)
+            | flow == invert theta  ->
+                Just $ Plumb curr theta (bend theta)
+            | flow == revBend theta ->
+                Just $ Plumb curr (bend theta) theta
         _ -> Nothing
 
 plumbGrid :: Grid -> [Plumb]

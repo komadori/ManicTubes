@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="inner" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111" />
+      <stop offset="100%" stop-color="#333" />
+    </linearGradient>
+    <linearGradient id="outer" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#444" />
+      <stop offset="100%" stop-color="#222" />
+    </linearGradient>
+  </defs>
+  <path d="M0,40 L100,40 L100,100 L0,100 Z" fill="blue" />
+  <path d="M2.5,2.5 L37.5,2.5 L37.5,62.5 L62.5,62.5 L62.5,2.5 L97.5,2.5 L97.5,97.5 L2.5,97.5 Z" fill="url(#inner)" stroke="url(#outer)" stroke-width="5" />
+</svg>
+

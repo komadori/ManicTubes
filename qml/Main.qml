@@ -8,7 +8,19 @@ Item {
         onStopped: finished();
     }
 
-    Row {
+    Repeater {
+        model: plumb;
+
+        BasicTile {
+            x: modelData.x*100;
+            y: modelData.y*100;
+            startAngle: modelData.enterAngle;
+            endAngle: modelData.exitAngle;
+            volume: 0;
+        }
+    }
+
+    /*Row {
         BasicTile {
            startAngle: 0;
            endAngle: 90;
@@ -24,5 +36,5 @@ Item {
            endAngle: 180;
            volume: Math.max(Math.min(n-2, 1.1), 0);
         }
-    }
+    }*/
 }

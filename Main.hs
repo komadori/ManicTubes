@@ -4,9 +4,10 @@ import Graphics.QML
 
 main :: IO ()
 main = do
-    clazz <- newClass []
+    clazz <- newClass [
+        defMethod' "finished" (\_ -> putStrLn "All Done! :-)")]
     object <- newObject clazz ()
     runEngineLoop $ defaultEngineConfig {
-        initialDocument = fileDocument "qml/BasicTileTest.qml",
+        initialDocument = fileDocument "qml/Main.qml",
         contextObject = Just $ anyObjRef object
     }
